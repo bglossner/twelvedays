@@ -172,6 +172,7 @@ a.sourceLine {
 <h3>Test Your Function</h3>
 <p>Try your function out on the gifts in the dataset.<br />
 (Consider: is your function <em>vectorized</em>? It does not have to be, but it may make things simpler!)</p>
+<p><em>Yes, this function <strong>is</strong> vectorized.</em></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pluralize_gift</span>(xmas<span class="sc">$</span>Gift.Item)</span></code></pre></div>
 <pre><code>##  [1] &quot;partridges&quot; &quot;doves&quot;      &quot;hens&quot;       &quot;birds&quot;      &quot;rings&quot;     
 ##  [6] &quot;geese&quot;      &quot;swans&quot;      &quot;maids&quot;      &quot;ladies&quot;     &quot;lords&quot;     
@@ -205,18 +206,20 @@ a.sourceLine {
 <span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    item <span class="ot">&lt;-</span> <span class="fu">pluralize_gift</span>(item)</span>
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (vowel_start) {</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    item <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;an&quot;</span>, item)</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    item <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;a&quot;</span>, item)</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&quot;{num_word} {adjective} {item} {verb} {location}&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_squish</span>()</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    num_word <span class="ot">&lt;-</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    item <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;an&quot;</span>, item)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    num_word <span class="ot">&lt;-</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    item <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;a&quot;</span>, item)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&quot;{num_word} {adjective} {item} {verb} {location}&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_squish</span>()</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>For example,</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_phrase</span>(<span class="at">num =</span> <span class="dv">10</span>, </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">num_word =</span> <span class="st">&quot;ten&quot;</span>, </span>
@@ -246,12 +249,12 @@ a.sourceLine {
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>xmas <span class="sc">%&gt;%</span></span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Full.Phrase)</span></code></pre></div>
-<pre><code>##  [1] &quot;one a partridge in a pear tree&quot; &quot;two turtle doves&quot;              
-##  [3] &quot;three french hens&quot;              &quot;four calling birds&quot;            
-##  [5] &quot;five golden rings&quot;              &quot;six geese a-laying&quot;            
-##  [7] &quot;seven swans a-swimming&quot;         &quot;eight maids a-milking&quot;         
-##  [9] &quot;nine ladies dancing&quot;            &quot;ten lords a-leaping&quot;           
-## [11] &quot;eleven pipers piping&quot;           &quot;twelve drummers drumming&quot;</code></pre>
+<pre><code>##  [1] &quot;a partridge in a pear tree&quot; &quot;two turtle doves&quot;          
+##  [3] &quot;three french hens&quot;          &quot;four calling birds&quot;        
+##  [5] &quot;five golden rings&quot;          &quot;six geese a-laying&quot;        
+##  [7] &quot;seven swans a-swimming&quot;     &quot;eight maids a-milking&quot;     
+##  [9] &quot;nine ladies dancing&quot;        &quot;ten lords a-leaping&quot;       
+## [11] &quot;eleven pipers piping&quot;       &quot;twelve drummers drumming&quot;</code></pre>
 <hr />
 <div id="step-three-iteration." class="section level2">
 <h2>Step Three: Iteration.</h2>
@@ -271,38 +274,31 @@ a.sourceLine {
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Step 1: Setup the intro line</span></span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  num_word <span class="ot">&lt;-</span> dataset <span class="sc">%&gt;%</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Day <span class="sc">==</span> line) <span class="sc">%&gt;%</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(Day.in.Words)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ordinal found in english package</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  num_word <span class="ot">&lt;-</span> <span class="fu">ordinal</span>(line)</span>
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  intro <span class="ot">&lt;-</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&quot;On the {num_word} day of Christmas, my true love sent to me,&quot;</span>)</span>
 <span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Step 2: Sing the gift phrases</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rev found from googling: &quot;reverse vector r&quot; -- https://stat.ethz.ch/R-manual/R-patched/library/base/html/rev.html</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  phrases <span class="ot">&lt;-</span> dataset <span class="sc">%&gt;%</span></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Day <span class="sc">&lt;=</span> line) <span class="sc">%&gt;%</span></span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(Day) <span class="sc">%&gt;%</span></span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>({{phrase_col}}) <span class="sc">%&gt;%</span></span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rev</span>()</span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>  <span class="do">## put it together</span></span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (line <span class="sc">&gt;</span> <span class="dv">1</span>) {</span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    phrases[<span class="fu">length</span>(phrases)] <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;and&quot;</span>,</span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>                                      <span class="fu">str_replace</span>(phrases[<span class="fu">length</span>(phrases)],</span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>                                                  <span class="st">&quot;one &quot;</span>, <span class="st">&quot;&quot;</span>))</span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>  phrases <span class="ot">&lt;-</span> <span class="fu">paste</span>(phrases, <span class="at">collapse =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>  day_lines <span class="ot">&lt;-</span> <span class="fu">paste</span>(intro, phrases, <span class="st">&quot;&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(day_lines)</span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  phrases <span class="ot">&lt;-</span> dataset <span class="sc">%&gt;%</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>({{phrase_col}})</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  <span class="do">## put it together</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (line <span class="sc">&gt;</span> <span class="dv">1</span>) {</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    phrases[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;and&quot;</span>, phrases[<span class="dv">1</span>])</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>  phrases <span class="ot">&lt;-</span> <span class="fu">paste</span>(phrases[line<span class="sc">:</span><span class="dv">1</span>], <span class="at">collapse =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  day_lines <span class="ot">&lt;-</span> <span class="fu">paste</span>(intro, phrases, <span class="st">&quot;&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(day_lines)</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>For example,</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sing_line</span>(xmas, </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">line =</span> <span class="dv">2</span>, </span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">phrase_col =</span> Full.Phrase))</span></code></pre></div>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">line =</span> <span class="dv">2</span>, </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">phrase_col =</span> Full.Phrase))</span></code></pre></div>
 <pre><code>## On the second day of Christmas, my true love sent to me,
 ## two turtle doves
 ## and a partridge in a pear tree</code></pre>
@@ -332,7 +328,7 @@ and a partridge in a pear tree.</code></pre>
 <span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_c</span>(<span class="at">collapse =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>()</span></code></pre></div>
 <pre><code>## On the first day of Christmas, my true love sent to me,
-## one a partridge in a pear tree
+## a partridge in a pear tree
 ## 
 ## On the second day of Christmas, my true love sent to me,
 ## two turtle doves

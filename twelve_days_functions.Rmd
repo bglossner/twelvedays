@@ -15,6 +15,7 @@ library(dplyr)
 library(glue)
 library(stringr)
 library(purrr)
+library(english)
 ```
 
 
@@ -83,6 +84,8 @@ Try your function out on the gifts in the dataset.
 (Consider: is your function *vectorized*?  It does not have to be, but it may
 make things simpler!)
 
+*Yes, this function __is__ vectorized.*
+
 ```{r}
 
 pluralize_gift(xmas$Gift.Item)
@@ -120,11 +123,13 @@ make_phrase <- function(num, num_word, item, verb, adjective, location) {
     item <- pluralize_gift(item)
     
   } else if (vowel_start) {
-  
+    
+    num_word <- ""
     item <- paste("an", item)
     
   } else {
     
+    num_word <- ""
     item <- paste("a", item)
     
   }
@@ -160,10 +165,6 @@ the daily phrases.
 **Hint:** The `Day.in.Words` variable isn't quite what you want! You want `12`
 to say `"twelve"` **not** `"twelfth"`. I suggest using the **english** package
 to create numbered days and then use those in your `pmap_chr()`!
-
-```{r include=FALSE}
-library(english)
-```
 
 
 ```{r}
@@ -208,31 +209,24 @@ sing_line <- function(dataset, line, phrase_col){
   
   # Step 1: Setup the intro line
   
-  num_word <- dataset %>%
-    filter(Day == line) %>%
-    pull(Day.in.Words)
+  # Ordinal found in english package
+  
+  num_word <- ordinal(line)
   
   intro <- glue::glue("On the {num_word} day of Christmas, my true love sent to me,")
   
   # Step 2: Sing the gift phrases
-
-  # rev found from googling: "reverse vector r" -- https://stat.ethz.ch/R-manual/R-patched/library/base/html/rev.html
   
   phrases <- dataset %>%
-    filter(Day <= line) %>%
-    arrange(Day) %>%
-    pull({{phrase_col}}) %>%
-    rev()
+    pull({{phrase_col}})
 
   ## put it together
   
   if (line > 1) {
-    phrases[length(phrases)] <- paste("and",
-                                      str_replace(phrases[length(phrases)],
-                                                  "one ", ""))
+    phrases[1] <- paste("and", phrases[1])
   }
 
-  phrases <- paste(phrases, collapse = "\n")
+  phrases <- paste(phrases[line:1], collapse = "\n")
   day_lines <- paste(intro, phrases, "", sep = "\n")
   return(day_lines)
 }
@@ -245,8 +239,8 @@ For example,
 
 ```{r}
 cat(sing_line(xmas, 
-          line = 2, 
-          phrase_col = Full.Phrase))
+              line = 2, 
+              phrase_col = Full.Phrase))
 
 ```
 
