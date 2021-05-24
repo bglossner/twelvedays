@@ -1,5 +1,7 @@
 ---
-title: "Lab: The 12 Days of Christmas"
+title: "Lab 8: The 12 Days of Christmas"
+author: "Kush Upadhyay (Manager), Allison Trutna, Chris Price, and Ben Glossner"
+date: "5/23/2021"
 output:
   prettydoc::html_pretty:
     theme: tactile
@@ -17,13 +19,6 @@ library(stringr)
 library(purrr)
 library(english)
 ```
-
-
-### A Test Dataset
-
-Run the code below to load up a dataset called `xmas` that contains the crucial 
-information about the gifts in the song. We will use this dataset to test out
-our functions as we work on them.
 
 ```{r include=FALSE}
 xmas <- read.csv("https://www.dropbox.com/s/e584pryn8evm1gz/xmas.csv?dl=1")
@@ -57,32 +52,18 @@ pluralize_gift <- function(gift){
 }
 ```
 
-*Hint 1:* Note that the gifts on days six and nine have unusual pluralizations.
-You may assume that in other datasets, there will be no special cases besides
-these types.
+## Step One Test
 
-*Hint 2:*  The following small example may be useful to you:
+Try your function out on the gifts in the dataset.  
+(Consider: is your function *vectorized*?  It does not have to be, but it may
+make things simpler!)
 
-```{r, eval = TRUE}
+```{r, eval = TRUE, include = FALSE}
 my_names <- c("Kimberly", "Trini", "Jason", "Billy", "Zach", "Tommy")
 
 my_names %>%
   str_replace("y$", "ies")
 ```
-
-
-**Important:**  You should **absolutely not** "hard-code" anything into this 
-function; this function should work in general, not just for the items in the
-12 Days of Christmas.  For example, the word "rings" should not appear anywhere
-in the function.  I should be able to give it any gift and any day, and get back
-the plural of that gift.
-
-
-### Test Your Function
-
-Try your function out on the gifts in the dataset.  
-(Consider: is your function *vectorized*?  It does not have to be, but it may
-make things simpler!)
 
 *Yes, this function __is__ vectorized.*
 
@@ -93,7 +74,6 @@ pluralize_gift(xmas$Gift.Item)
 purrr::map_chr(xmas$Gift.Item, pluralize_gift)
 
 ```
-
 
 ---
 
@@ -139,25 +119,7 @@ make_phrase <- function(num, num_word, item, verb, adjective, location) {
 }
 ```
 
-For example, 
-
-```{r}
-make_phrase(num = 10, 
-            num_word = "ten", 
-            item = "lord",
-            verb = "a-leaping", 
-            adjective = "", 
-            location = "")
-```
-
-should return
-
-```
-"ten lords a-leaping"
-```
-
-
-# Test Your Function
+# Step 2 Test
 
 Try your function out on the `xmas` data, by making a new variable containing
 the daily phrases.
@@ -209,7 +171,7 @@ sing_line <- function(dataset, line, phrase_col){
   
   # Step 1: Setup the intro line
   
-  # Ordinal found in english package
+  # Ordinal found in english package (talked about in office hours)
   
   num_word <- ordinal(line)
   
@@ -234,32 +196,11 @@ sing_line <- function(dataset, line, phrase_col){
 
 ```
 
-For example,
-
-
-```{r}
-cat(sing_line(xmas, 
-              line = 2, 
-              phrase_col = Full.Phrase))
-
-```
-
-should return
-
-```
-On the second day of Christmas, my true love sent to me,
-two turtle doves 
-and a partridge in a pear tree.
-```
-
-*Hint:*  The `{{phrase_col}}` part, which I provided for you, lets you use 
-column names as arguments to a function.  Don't delete that line of code!
-
 ---
 
 ## Step Four: Use Your Functions!
 
-Run the following code to test out your functions! The ouput should be the 
+Run the following code to test out your functions! The output should be the 
 lyrics for the entire 12 Days of Christmas song. 
 
 ```{r}
